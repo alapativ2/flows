@@ -1,7 +1,8 @@
 package main
 
 import "fmt"
+import "testing"
 
-func TestMain() {
+func TestMain(t *testing.T) {
     fmt.Println("Hello, World!")
 }
