@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  read:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,10 +27,32 @@ jobs:
           cat main_test.go
           
       - name: Run tests
-        run: go test -v ./... | tee output.txt
+        run: go test -v dump/dump_test.go | tee output.txt
 
       - name: archive
         uses: actions/upload-artifact@v2
         with:
           name: test report
           path: output.txt
+  dump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with: 
+          go-version: '1.21.0'  # Ensure correct indentation here
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Run reading dumped file
+        run: go test -v read/read_test.go | tee output1.txt
+
+      # - name: archive
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: test report
