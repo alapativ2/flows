@@ -4,14 +4,16 @@ import (
     "os"
     "path/filepath"
     "testing"
+
+    "github.com/stretchr/testify/assert" // Ensure you have this package in your go.mod
 )
 
 func TestMain(t *testing.T) {
+    assert := assert.New(t)
+
     // Get current working directory
     cwd, err := os.Getwd()
-    if err != nil {
-        t.Fatalf("failed to get current working directory: %s", err)
-    }
+    assert.NoError(err, "failed to get current working directory")
     t.Logf("Current working directory: %s", cwd)
 
     // Define the file path
@@ -20,19 +22,15 @@ func TestMain(t *testing.T) {
 
     // Check if the file exists
     _, err = os.Stat(filePath)
-    if err != nil {
-        if os.IsNotExist(err) {
-            t.Fatalf("file does not exist: %s", filePath)
-        } else {
-            t.Fatalf("error checking file: %s", err)
-        }
+    assert.NoError(err, "file path in  directory doest exist")
+    if os.IsNotExist(err) {
+        t.Fatalf("file does not exist: %s", filePath)
     }
+    assert.NoError(err, "error checking file")
 
     // Read the file content
     data, err := os.ReadFile(filePath)
-    if err != nil {
-        t.Fatalf("failed reading file: %s", err)
-    }
+    assert.NoError(err, "failed reading file")
 
     t.Log("Contents of output.txt ", string(data))
 }
