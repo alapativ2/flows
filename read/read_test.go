@@ -19,8 +19,11 @@ func TestMain(t *testing.T) {
     t.Logf("Checking file at path: %s", filePath)
 
     // Check if the file exists
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+    _, err = os.Stat(filePath)
+    if os.IsNotExist(err) {
         t.Fatalf("file does not exist: %s", filePath)
+    } else if err != nil {
+        t.Fatalf("error checking file: %s", err)
     }
 
     // Read the file content
