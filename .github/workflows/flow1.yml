@@ -50,6 +50,12 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
+      - name: Download dump test output
+        uses: actions/download-artifact@v2
+        with:
+          name: dump-test-output
+          path: .
+          
       - name: Run reading dumped file
         run: go test -v read/read_test.go | tee output1.txt
 
