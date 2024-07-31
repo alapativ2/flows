@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
-      - run: |
-          echo  "updating main.go file.."
-          sed -i "s/Hello, World!/super world:/g" main_test.go
-          cat main_test.go
+      # - run: |
+      #     echo  "updating main.go file.."
+      #     sed -i "s/Hello, World!/super world:/g" main_test.go
+      #     cat main_test.go
           
       - name: Run tests
         run: go test -v dump/dump_test.go | tee output.txt
