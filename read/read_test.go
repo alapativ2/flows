@@ -22,7 +22,7 @@ func TestMain(t *testing.T) {
 
     // Check if the file exists
     _, err = os.Stat(filePath)
-    assert.NoError(err, "file path in  directory doest exist")
+    assert.NoError(err, "failed to get file using path")
     if os.IsNotExist(err) {
         t.Fatalf("file does not exist: %s", filePath)
     }
@@ -32,5 +32,5 @@ func TestMain(t *testing.T) {
     data, err := os.ReadFile(filePath)
     assert.NoError(err, "failed reading file")
 
-    t.Log("Contents of output.txt ", string(data))
+    t.Logf("Contents of output.txt: %s", string(data))
 }
