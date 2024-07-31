@@ -54,12 +54,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: output
-          path: ./output.txt
+          path: ./  # Downloading to current directory
+
+      - name: List files in current directory
+        run: ls -la
 
       - name: Run reading dumped file
         run: go test -v read/read_test.go | tee output1.txt
-
-      # - name: archive
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: test report
