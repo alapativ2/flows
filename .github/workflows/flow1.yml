@@ -57,10 +57,10 @@ jobs:
 
       - name: Run reading dumped file
         run: |
-          set -o pipefail
-          go test -v read/read_test.go  | tee output1.txt
-          test_status=${PIPESTATUS[0]}
-          if [ $test_status -ne 0 ]; then
-            echo "Tests failed"
-            exit $test_status
+         go test -v read/read_test.go 2>&1 | tee output1.txt
+          exit_code=${PIPESTATUS[0]}
+          echo "Test exit code: $exit_code"
+          cat output1.txt
+          if [ $exit_code -ne 0 ]; then
+            exit $exit_code
           fi
