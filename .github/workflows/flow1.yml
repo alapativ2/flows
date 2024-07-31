@@ -16,24 +16,20 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with: 
-          go-version: '1.21.0'  # Ensure correct indentation here
+          go-version: '1.21.0'
 
       - name: Install dependencies
         run: go mod tidy
 
-      # - run: |
-      #     echo  "updating main.go file.."
-      #     sed -i "s/Hello, World!/super world:/g" main_test.go
-      #     cat main_test.go
-          
       - name: Run tests
         run: go test -v dump/dump_test.go | tee output.txt
 
-      - name: archive
+      - name: Archive test output
         uses: actions/upload-artifact@v2
         with:
           name: output
           path: ./output.txt
+
   read:
     runs-on: ubuntu-latest
     needs: dump
@@ -45,7 +41,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with: 
-          go-version: '1.21.0'  # Ensure correct indentation here
+          go-version: '1.21.0'
 
       - name: Install dependencies
         run: go mod tidy
@@ -54,7 +50,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: output
-          path: ./  # Downloading to current directory
+          path: ./
 
       - name: List files in current directory
         run: ls -la
@@ -67,4 +63,3 @@ jobs:
             echo "Tests failed"
             exit $test_status
           fi
-
