@@ -60,4 +60,9 @@ jobs:
         run: ls -la
 
       - name: Run reading dumped file
-        run: go test -v read/read_test.go | tee output1.txt
+        run: |
+          go test -v read/read_test.go | tee output1.txt
+          if [  ${PIPESTATUS[0]} -ne 0   ]; then
+            echo "Test failed"
+          exit 1
+          fi
