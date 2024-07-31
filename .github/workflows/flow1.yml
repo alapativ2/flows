@@ -27,7 +27,7 @@ jobs:
           cat main_test.go
           
       - name: Run tests
-        run: go test ./... | tee output.txt
+        run: go test -v ./... | tee output.txt
 
       - name: archive
         uses: actions/upload-artifact@v2
