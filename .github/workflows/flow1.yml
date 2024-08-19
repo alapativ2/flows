@@ -8,10 +8,10 @@ on:
     inputs:
       config:
         description: |
-          **Configuration in JSON format. Example:**
-           ACT = 1;NSW = 2;NT = 3;QLD = 4;SA = 5;TAS = 6;VIC = 7;WA = 8;
-          
-          {
+           Configuration in JSON format.
+           **ACT = 1;NSW = 2;NT = 3;QLD = 4;SA = 5;TAS = 6;VIC = 7;WA = 8**
+           Example: 
+           {
             "settlementParams": {
               "creditEnquiryId": "",
               "creditAssessmentId": "",
@@ -33,7 +33,7 @@ on:
                 "personaId": ""
               }
             }
-          }
+           }
         required: true
 jobs:
   dump:
