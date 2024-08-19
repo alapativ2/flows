@@ -4,7 +4,35 @@ on:
   push:
     branches:
       - main
-
+  workflow_dispatch:
+    inputs:
+      config:
+        description: |
+          **Configuration in JSON format. Example:**
+          -- {
+            "settlementParams": {
+              "creditEnquiryId": "",
+              "creditAssessmentId": "",
+              "dlpAccountNumber": "",
+              "loanApplicationId": "",
+              "loanId": "its loan facility config id aka ProductPreferences id",
+              "loanTermMonths": 360,
+              "offsetAccountNumber": "",
+              "productMarketingCode": "HLVAR01",
+              "settlementAccountNumber": "",
+              "settlementId": "",
+              "settlementType": 1,
+              "trnState": 7,
+              "trn": "1613/230"
+            },
+            "customers": {
+              "soleCustomer": {
+                "ocvId": 1111111,
+                "personaId": ""
+              }
+            }
+          }
+        required: true
 jobs:
   dump:
     runs-on: ubuntu-latest
